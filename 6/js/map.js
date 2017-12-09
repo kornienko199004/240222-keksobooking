@@ -4,6 +4,7 @@
   var pageMap = document.querySelector('.map');
   var form = document.querySelector('.notice__form');
   var mapPinMain = pageMap.querySelector('.map__pin--main');
+  var PIN_MAIN_SHIFT_Y = 54;
   var rentData = window.generatedAds;
 
   var fillMap = function () {
@@ -61,7 +62,10 @@
   };
 
   mapPinMain.addEventListener('mouseup', onMainPinMouseup);
-
+  var confineAddress = {
+    min: 100,
+    max: 500
+  };
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
@@ -83,8 +87,10 @@
         y: moveEvt.clientY
       };
 
-      mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
       mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+      if ((mapPinMain.offsetTop - shift.y) >= (confineAddress.min + PIN_MAIN_SHIFT_Y) && (mapPinMain.offsetTop - shift.y) <= (confineAddress.max + PIN_MAIN_SHIFT_Y)) {
+        mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+      }
       window.form.inputAddress.value = (mapPinMain.offsetTop - shift.y) + ', ' + (mapPinMain.offsetLeft - shift.x);
     };
 
