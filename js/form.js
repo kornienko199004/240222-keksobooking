@@ -6,7 +6,6 @@
   var HOUSE_TYPES = ['bungalo', 'flat', 'house', 'palace'];
   var DECIMAL_RADIX = 10;
   var MIN_PRICES = [0, 1000, 5000, 10000];
-  var PIN_MAIN_SHIFT_Y = 53;
 
   var form = document.querySelector('.notice__form');
   var inputAddress = document.querySelector('#address');
@@ -68,7 +67,7 @@
 
   var getMainPinAddress = function () {
     var styles = getComputedStyle(mapPinMain);
-    var address = (parseInt(styles.left, DECIMAL_RADIX) + ', ' + (parseInt(styles.top, DECIMAL_RADIX) + PIN_MAIN_SHIFT_Y));
+    var address = (parseInt(styles.top, DECIMAL_RADIX) + ', ' + (parseInt(styles.left, DECIMAL_RADIX)));
     return address;
   };
 
@@ -128,14 +127,12 @@
   };
 
   var onSuccess = function () { // сброс полей формы при успешной отправке
-    inputTitle.value = '';
+    form.reset();
     inputPrice.value = '1000';
     inputAddress.value = getMainPinAddress();
-    inputType.value = 'flat';
-    inputTimein.value = '12:00';
-    inputTimeout.value = '12:00';
-    inputRooms.value = '1';
     inputCapacity.value = '1';
+    window.card.hide();
+    window.pin.deactivate();
   };
 
   form.setAttribute('action', 'https://js.dump.academy/keksobooking');
@@ -173,3 +170,14 @@
 
 })();
 
+/*
+  var onSubmitForm = function (e) {
+    window.backend.save(new FormData(form), function () {
+      form.reset();
+      inputAddress.value = getMainPinAddress();
+      window.card.hide();
+      inputPrice.value = '1000';
+    }, window.message.onError);
+    e.preventDefault();
+  };
+ */

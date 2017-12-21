@@ -32,7 +32,7 @@
     return function (item) {
       var id = item.dataset.id;
 
-      if (filterSelect.value === 'any' || filterSelect.value === (window.map.rentInformations[id].offer[property] + '')) {
+      if (filterSelect.value === 'any' || filterSelect.value === (window.rentInformations[id].offer[property] + '')) {
         return true;
       } else {
         return false;
@@ -43,7 +43,7 @@
   var filterByPrice = function (filterSelect) {
     return function (item) {
       var id = item.dataset.id;
-      var adPrice = window.map.rentInformations[id].offer.price + '';
+      var adPrice = window.rentInformations[id].offer.price + '';
 
       switch (filterSelect.value) {
         case 'any':
@@ -71,7 +71,7 @@
     });
 
     return features.every(function (feature) {
-      return window.map.rentInformations[id].offer.features.indexOf(feature) !== -1;
+      return window.rentInformations[id].offer.features.indexOf(feature) !== -1;
     });
   };
 

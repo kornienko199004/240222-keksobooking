@@ -53,10 +53,7 @@
       pins[j].addEventListener('click', onPinClick);
     }
     mapPinMain.removeEventListener('mouseup', onMainPinMouseup);
-    window.map = {
-      rentInformations: rentInformations,
-      pins: pins
-    };
+    window.rentInformations = rentInformations;
   };
 
   var onCloseEsc = function (evt) { // Функция навешивается на document и закрывает попап при нажатии на escape
