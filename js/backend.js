@@ -2,11 +2,15 @@
 
 (function () {
 
+  var TIME_OUT = 10000;
+  var TIME_OUT_SEC = 10;
+  var GOOD_REQUEST = 200;
+
   var setup = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === GOOD_REQUEST) {
         onLoad(xhr.response);
       } else {
         onError('Произошла ошибка. Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);
@@ -16,9 +20,9 @@
       onError('Произошла ошибка соединения');
     });
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout / 1000 + 'с');
+      onError('Запрос не успел выполниться за ' + TIME_OUT_SEC + 'с');
     });
-    xhr.timeout = 10000;
+    xhr.timeout = TIME_OUT;
     return xhr;
   };
 

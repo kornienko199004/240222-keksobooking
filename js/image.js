@@ -3,6 +3,8 @@
 (function () {
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var IMG_WIDTH = '40'; // px
+  var IMG_HEIGHT = '44'; // px
 
   var formNotice = document.querySelector('.notice__form');
   var fileChoosers = document.querySelectorAll('.upload input[type=file]');
@@ -47,8 +49,8 @@
   };
   var showMiniPhoto = function (content) {
     var img = document.createElement('IMG');
-    img.width = '40';
-    img.height = '44';
+    img.width = IMG_WIDTH;
+    img.height = IMG_HEIGHT;
     img.style = 'margin: 10px';
     uploadPhoto.appendChild(img);
     img.src = content;

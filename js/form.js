@@ -4,7 +4,9 @@
 
   var CHECK_TIMES = ['12:00', '13:00', '14:00'];
   var HOUSE_TYPES = ['bungalo', 'flat', 'house', 'palace'];
+  var DECIMAL_RADIX = 10;
   var MIN_PRICES = [0, 1000, 5000, 10000];
+  var PIN_MAIN_SHIFT_Y = 53;
 
   var form = document.querySelector('.notice__form');
   var inputAddress = document.querySelector('#address');
@@ -16,6 +18,7 @@
   var inputRooms = document.querySelector('#room_number');
   var inputCapacity = document.querySelector('#capacity');
   var fields = form.querySelectorAll('fieldset');
+  var mapPinMain = document.querySelector('.map__pin--main');
 
   var disableFields = function () {
     for (var i = 0; i < fields.length; i++) {
@@ -61,6 +64,12 @@
         capacity1.value = 0;
         break;
     }
+  };
+
+  var getMainPinAddress = function () {
+    var styles = getComputedStyle(mapPinMain);
+    var address = (parseInt(styles.left, DECIMAL_RADIX) + ', ' + (parseInt(styles.top, DECIMAL_RADIX) + PIN_MAIN_SHIFT_Y));
+    return address;
   };
 
   var onTitleInvalid = function () {
@@ -120,8 +129,8 @@
 
   var onSuccess = function () { // сброс полей формы при успешной отправке
     inputTitle.value = '';
-    inputPrice.value = '';
-    inputAddress.value = '';
+    inputPrice.value = '1000';
+    inputAddress.value = getMainPinAddress();
     inputType.value = 'flat';
     inputTimein.value = '12:00';
     inputTimeout.value = '12:00';
@@ -138,7 +147,7 @@
   inputTitle.setAttribute('minlength', '30');
   inputTitle.setAttribute('maxlength', '100');
   inputPrice.required = true;
-  inputPrice.min = 0;
+  inputPrice.min = 1000;
   inputPrice.max = 1000000;
   inputPrice.value = 1000;
   disableFields();

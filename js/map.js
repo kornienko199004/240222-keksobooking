@@ -3,6 +3,8 @@
 (function () {
 
   var PIN_MAIN_SHIFT_Y = 53;
+  var MIN_Y_COORD = 100;
+  var MAX_Y_COORD = 500;
 
   var pageMap = document.querySelector('.map');
   var form = document.querySelector('.notice__form');
@@ -82,8 +84,8 @@
 
   mapPinMain.addEventListener('mouseup', onMainPinMouseup);
   var confineAddress = {
-    min: 100,
-    max: 500
+    min: MIN_Y_COORD,
+    max: MAX_Y_COORD
   };
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
